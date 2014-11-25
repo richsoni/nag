@@ -1,0 +1,6 @@
+# MVP
+(A) save query for the day
+(A) query reset at 12pm
+
+write to ```data/2014/12/24```
+    ```"work out (dawg)" 12043234:23409````
