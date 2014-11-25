@@ -21,5 +21,5 @@
 (if (task-is-pending?)
   (if (query)
     (with-open-file (out "/Users/rich/.cl/data" :direction :output :if-exists :append )
-      (princ "work out" out)))
-  (format t ""))
+      (princ "work out" out))))
+
