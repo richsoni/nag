@@ -1,11 +1,17 @@
 #! /usr/bin/env clisp
+(defun get-date ()
+ (multiple-value-bind (_ _ _ day month year) (get-decoded-time)
+   (format nil "~A-~A-~A" year month day)))
+
+(defun query-text ()
+  (format nil "~A ~A" (get-date) "work out"))
 
 (defun task-is-pending? ()
   (eql
     1
     (run-program
       "grep"
-      :arguments '("work out" "/Users/rich/.cl/data")
+      :arguments (list (query-text) "/Users/rich/.cl/data")
       :output nil
       )))
 
@@ -21,5 +27,5 @@
 (if (task-is-pending?)
   (if (query)
     (with-open-file (out "/Users/rich/.cl/data" :direction :output :if-exists :append )
-      (princ "work out" out))))
+      (princ (format nil "~A~%" (query-text)) out))))
 
