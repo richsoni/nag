@@ -12,7 +12,7 @@
     1
     (run-program
       "grep"
-      :arguments (list (query-text task) "/Users/rich/.cl/data")
+      :arguments (list (query-text task) "/Users/rich/.nag/data")
       :output nil
       )))
 
@@ -28,7 +28,7 @@
 
 (defun get-tasks ()
   (setf tasks NIL)
-  (with-open-file (in "/Users/rich/.cl/questions" :direction :input)
+  (with-open-file (in "/Users/rich/.nag/questions" :direction :input)
     (do ((line (read-line in nil 'eof)
                (read-line in nil 'eof)))
       ((eql line 'eof))
@@ -39,7 +39,7 @@
 (defun process-task (task)
   (if (task-is-pending? task)
     (if (query task)
-      (with-open-file (out "/Users/rich/.cl/data" :direction :output :if-exists :append )
+      (with-open-file (out "/Users/rich/.nag/data" :direction :output :if-exists :append )
         (princ (format nil "~A~%" (query-text task)) out))))
 )
 
