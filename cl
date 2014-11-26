@@ -28,4 +28,3 @@
   (if (query)
     (with-open-file (out "/Users/rich/.cl/data" :direction :output :if-exists :append )
       (princ (format nil "~A~%" (query-text)) out))))
-
