@@ -35,8 +35,13 @@
       (setf tasks (append tasks (list line)))))
   tasks)
 
-(if (task-is-pending? (car (get-tasks)))
-  (if (query (car (get-tasks)))
-    (with-open-file (out "/Users/rich/.cl/data" :direction :output :if-exists :append )
-      (princ (format nil "~A~%" (query-text (car (get-tasks)))) out))))
+
+(defun process-task (task)
+  (if (task-is-pending? task)
+    (if (query task)
+      (with-open-file (out "/Users/rich/.cl/data" :direction :output :if-exists :append )
+        (princ (format nil "~A~%" (query-text task)) out))))
+)
+
+(mapcar #'process-task (get-tasks))
 
