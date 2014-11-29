@@ -1,4 +1,11 @@
-(load "/Users/rich/nag/lib/each-file-line.lisp")
+(defun home-path ()
+  (directory-namestring
+    (merge-pathnames 
+     (make-pathname
+      :directory '(:relative ""))
+     (user-homedir-pathname))))
+
+(load (format nil "~Anag/lib/each-file-line.lisp" (home-path)))
 
 (defun get-date ()
  (multiple-value-bind (_ _ _ day month year) (get-decoded-time)
@@ -17,7 +24,7 @@
       1
       (run-program
         "grep"
-        :arguments (list (query-text task) "/Users/rich/.nag/data")
+        :arguments (list (query-text task) (format nil "~A.nag/data" (home-path)))
         :output nil
         ))))
 
@@ -45,6 +52,6 @@
 (defun process-task (task)
   (if (task-is-pending? task)
     (if (query task)
-      (with-open-file (out "/Users/rich/.nag/data" :direction :output :if-exists :append )
+      (with-open-file (out (format nil "~A.nag/data" (home-path)) :direction :output :if-exists :append )
         (princ (format nil "~A~%" (query-text task)) out))))
   )

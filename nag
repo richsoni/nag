@@ -1,3 +1,13 @@
 #! /usr/bin/env clisp
-(load "/Users/rich/nag/lib/nag.lisp")
-(mapcar #'process-task (read-lines "/Users/rich/.nag/questions"))
+; bootstrap nag
+(defun home-path ()
+  (directory-namestring
+    (merge-pathnames 
+     (make-pathname
+      :directory '(:relative ""))
+     (user-homedir-pathname))))
+
+(load (format nil "~Anag/lib/nag.lisp" (home-path)))
+
+;;process each task read in
+(mapcar #'process-task (read-lines (format nil "~A.nag/questions" (home-path))))
