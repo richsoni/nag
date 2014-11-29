@@ -1,4 +1,5 @@
 #! /usr/bin/env clisp
+(load "/Users/rich/nag/lib/each-file-line.lisp")
 
 (defun get-date ()
  (multiple-value-bind (_ _ _ day month year) (get-decoded-time)
@@ -25,16 +26,12 @@
           (t (query task))
         )))
 
-
-(defun get-tasks ()
-  (setf tasks NIL)
-  (with-open-file (in "/Users/rich/.nag/questions" :direction :input)
-    (do ((line (read-line in nil 'eof)
-               (read-line in nil 'eof)))
-      ((eql line 'eof))
-      (setf tasks (append tasks (list line)))))
-  tasks)
-
+(defun read-lines (path)
+  (setf lines NIL)
+  (each-file-line path
+    #'(lambda (line)
+    (setf lines (append lines (list line)))))
+  lines)
 
 (defun process-task (task)
   (if (task-is-pending? task)
@@ -43,5 +40,4 @@
         (princ (format nil "~A~%" (query-text task)) out))))
 )
 
-(mapcar #'process-task (get-tasks))
-
+(mapcar #'process-task (read-lines "/Users/rich/.nag/questions"))
