@@ -7,14 +7,19 @@
 (defun query-text (task)
   (format nil "~A ~A" (get-date) task))
 
+(defun flagp (mode)
+  (find (format nil "--~A" mode) *args* :test #'equal))
+
 (defun task-is-pending? (task)
-  (eql
-    1
-    (run-program
-      "grep"
-      :arguments (list (query-text task) "/Users/rich/.nag/data")
-      :output nil
-      )))
+  (if (flagp "test")
+    t
+    (eql
+      1
+      (run-program
+        "grep"
+        :arguments (list (query-text task) "/Users/rich/.nag/data")
+        :output nil
+        ))))
 
 (defun query (task)
   (format t "did you ~A today?(yes no)~%> " task)
@@ -24,9 +29,10 @@
             ((eql 'yes answer) t)
             ((eql 'no answer) nil)
             (t
-              (format t "~%")
-               (query task)))
-          )))
+              (if (not (and (flagp "test") (eql 'exit answer)))
+                (progn
+                   (format t "~%")
+                   (query task))))))))
 
 
 (defun read-lines (path)
