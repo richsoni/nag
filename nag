@@ -1,4 +1,6 @@
 #! /usr/bin/env clisp
+(setf mode nil)
+
 ; bootstrap nag
 (defun home-path ()
   (directory-namestring
@@ -7,7 +9,15 @@
       :directory '(:relative ""))
      (user-homedir-pathname))))
 
+; "./lib/nag.lisp"
 (load (format nil "~Anag/lib/nag.lisp" (home-path)))
 
 ;;process each task read in
-(mapcar #'process-task (read-lines (format nil "~A.nag/questions" (home-path))))
+; "./nag.symlink/questions"
+(defun nag ()
+  (mapcar #'process-task (read-lines (format nil "~A.nag/questions" (home-path)))))
+
+(case (car *args*)
+      ('NIL (funcall 'nag))
+      (t (format t "~A not an option~%" (car *args*))))
+
