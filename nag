@@ -15,7 +15,7 @@
 ;;process each task read in
 ; "./nag.symlink/questions"
 (defun nag ()
-  (mapcar #'process-task (read-lines (format nil "~A.nag/questions" (home-path)))))
+  (mapcar #'process-task (get-tasks)))
 
 (case (car *args*)
       ('NIL (funcall 'nag))

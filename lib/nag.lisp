@@ -6,6 +6,7 @@
      (user-homedir-pathname))))
 
 (load (format nil "~Anag/lib/each-file-line.lisp" (home-path)))
+(load (format nil "~Anag/lib/defaults.lisp" (home-path))) ;./defaults.lisp
 
 (defun get-date ()
  (multiple-value-bind (_ _ _ day month year) (get-decoded-time)
@@ -48,9 +49,46 @@
     (setf lines (append lines (list line)))))
   lines)
 
+(let ((_pending-tasks NIL))
+  (defun pending-tasks ()
+    (if (not (null _pending-tasks))
+      _pending-tasks
+      (setf
+        _pending-tasks
+        (reduce
+          #'(lambda (memo task)
+              (if (task-is-pending? task)
+                (append memo (list task))
+                memo))
+          (read-lines (format nil "~A.nag/questions" (home-path)))
+          :initial-value NIL)))))
+
+(defun nag-count-len()
+  (let ((max-len (length (pending-tasks))))
+    (if (or (null nag-count) (> nag-count max-len))
+      max-len
+      nag-count)))
+
+(let ((_nag-count (nag-count-len)))
+  (defun get-tasks (&optional (tasks '()))
+    (case _nag-count
+      ((eql nil)
+       (pending-tasks))
+      (0
+       (setf _nag-count (nag-count-len))
+       tasks)
+      (t
+        (decf _nag-count)
+        (get-tasks (append-unique-random (pending-tasks) tasks))))))
+
+(defun append-unique-random(src dst)
+  (let ((task (nth (random (length src)) src)))
+    (if (find task dst)
+      (append-unique-random src dst)
+      (append dst (list task)))))
+
 (defun process-task (task)
   (if (task-is-pending? task)
     (if (query task)
       (with-open-file (out (format nil "~A.nag/data" (home-path)) :direction :output :if-exists :append )
-        (princ (format nil "~A~%" (query-text task)) out))))
-)
+        (princ (format nil "~A~%" (query-text task)) out)))))
