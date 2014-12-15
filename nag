@@ -18,7 +18,7 @@
 (defun nag ()
   (mapcar #'process-task (get-tasks)))
 
-(case (car *args*)
+(case (read-from-string (or (car *args*) "NIL"))
       ('NIL (funcall 'nag))
+      ('edit (format t "edit"))
       (t (format t "~A not an option~%" (car *args*))))
-

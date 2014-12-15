@@ -79,13 +79,7 @@
        tasks)
       (t
         (decf _nag-count)
-        (get-tasks (append-unique-random (pending-tasks) tasks))))))
-
-(defun append-unique-random(src dst)
-  (let ((task (nth (random (length src)) src)))
-    (if (find task dst)
-      (append-unique-random src dst)
-      (append dst (list task)))))
+        (get-tasks (choose-task-subset (pending-tasks) tasks))))))
 
 (defun process-task (task)
   (if (task-is-pending? task)
