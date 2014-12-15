@@ -15,11 +15,15 @@
 (defun query-text (task)
   (format nil "~A ~A" (get-date) task))
 
-(defun flagp (mode)
+(defun flagp (elem)
+  (if (< 2 (length elem))
+    (equal "--" (subseq elem 0 2))))
+
+(defun has-flag (mode)
   (find (format nil "--~A" mode) *args* :test #'equal))
 
 (defun task-is-pending? (task)
-  (if (flagp "test")
+  (if (has-flag "test")
     t
     (eql
       1
@@ -37,7 +41,7 @@
             ((eql 'yes answer) t)
             ((eql 'no answer) nil)
             (t
-              (if (not (and (flagp "test") (eql 'exit answer)))
+              (if (not (and (has-flag "test") (eql 'exit answer)))
                 (progn
                    (format t "~%")
                    (query task))))))))

@@ -18,7 +18,16 @@
 (defun nag ()
   (mapcar #'process-task (get-tasks)))
 
-(case (read-from-string (or (car *args*) "NIL"))
+(defun nag-edit ()
+  (run-shell-command
+    (format nil "$EDITOR ~A/.nag/questions" (home-path))))
+
+(defun command (&optional (lst *args*))
+  (if (flagp (car lst))
+    (command (cdr lst))
+    (read-from-string (or (car lst) "NIL") t nil)))
+
+(case (command)
       ('NIL (funcall 'nag))
-      ('edit (format t "edit"))
+      ('edit (funcall 'nag-edit))
       (t (format t "~A not an option~%" (car *args*))))

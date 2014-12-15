@@ -27,3 +27,7 @@ The answers get stored in .nag/data
 
 ```--test``` will set all tasks to pending e.g. depricate reset
 it will also enable ^D
+
+## Edit Mode
+
+Running ```nag edit``` will open the questions file within the $EDITOR.
