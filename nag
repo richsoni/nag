@@ -15,6 +15,11 @@
 
 ;;process each task read in
 ; "./nag.symlink/questions"
+(if (equal "TRUE" (getenv "NAG_IGNORE"))
+  (progn
+    (format t "bypassing nag~%")
+    (exit)))
+
 (defun nag ()
   (mapcar #'process-task (get-tasks)))
 

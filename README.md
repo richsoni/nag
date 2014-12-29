@@ -31,3 +31,6 @@ it will also enable ^D
 ## Edit Mode
 
 Running ```nag edit``` will open the questions file within the $EDITOR.
+
+## Ignoring Nag
+Nag will by ignored if the environment variable ```NAG_IGNORE``` exists with any value

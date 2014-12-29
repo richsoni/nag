@@ -69,7 +69,7 @@
 
 (defun nag-count-len()
   (let ((max-len (length (pending-tasks))))
-    (if (or (null nag-count) (> nag-count max-len))
+    (if (or (null nag-count) (> nag-count max-len) (has-flag "all"))
       max-len
       nag-count)))
 
