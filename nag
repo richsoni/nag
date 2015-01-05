@@ -1,6 +1,8 @@
-#! /usr/bin/env ruby
+#! /usr/bin/env coffee
 
-MODE = nil
+fs = require("fs")
+readline = require("readline")
+Stream = require("stream")
 
-# require "#{File.expand_path(".")}/lib/utils.rb"
-NAG_IGNORE = (ENV["NAG_IGNORE"] == "TRUE")
+questions = require("/Users/rich/.nag/questions")
+console.log(questions)
