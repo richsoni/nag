@@ -1,8 +1,52 @@
 #! /usr/bin/env coffee
+fs        = require("fs")
+readline  = require("readline")
+Stream    = require("stream")
 
-fs = require("fs")
-readline = require("readline")
-Stream = require("stream")
+class Questions
+  constructor: () ->
+    questions = require("/Users/rich/.nag/questions")
+    @questions = questions.map (question) ->
+      switch typeof question
+        when 'string' then {question: question}
+        when 'object'
+          name = Object.keys(question)[0]
+          {question: name, filters: question[name]}
 
-questions = require("/Users/rich/.nag/questions")
-console.log(questions)
+    @_currentQuestion = 0
+
+  currentQuestion: () -> @questions[@_currentQuestion]?.question
+  nextQuestion: () -> @_currentQuestion = @_currentQuestion + 1
+
+questions = new Questions()
+
+askQuestion = () ->
+  question = questions.currentQuestion()
+  answer   = null
+  rl = readline.createInterface({input: process.stdin, output: process.stdout})
+  rl.question "Did You #{question} today? ", (_answer) =>
+    answer = _answer
+    questions.nextQuestion()
+    if questions.currentQuestion()
+      rl.close()
+      askQuestion()
+    else
+      rl.close()
+  rl.on 'close', (code) ->
+    askQuestion() unless answer
+    return ""
+
+askQuestion()
+# readline.setPrompt('OHAI> ')
+# count = 0
+# readline.question(count++)
+
+# readline.on('line', (line) ->
+#   switch(line.trim())
+#     when 'hello'
+#       console.log('world!')
+#       break
+#     else
+#       console.log('Say what? I might have heard `' + line.trim() + '`')
+#       break
+#   readline.prompt()
