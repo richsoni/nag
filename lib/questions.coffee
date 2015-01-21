@@ -1,10 +1,31 @@
-io = require("./nagIO")
+io      = require("./nagIO")
+history = io.history()
+moment  = require("moment")
+NOW     = moment()
+
+class Filter
+  constructor: (filters) ->
+    @filters = filters || {}
+
+
+  inRange: (timestamp) ->
+    if @filters.between
+      #supports only am and pm now
+      FORMATS = ['hh:mma', 'hha']
+      start = moment(@filters.between[0], FORMATS)
+      end   = moment(@filters.between[1], FORMATS)
+      start <= NOW <= end
 
 class Question
   constructor: (q) ->
-    {@question, @filter} = q
+    {@question} = q
+    @filter = new Filter(q.filters)
 
-  isRelevant: () -> true
+  isRelevant: () ->
+    for item in history
+      if item[1] == @question
+        return false unless @filter.inRange(item[0])
+    return true
 
 class Questions
   constructor: () ->
