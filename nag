@@ -8,17 +8,18 @@ questions = require("./lib/questions")
 askQuestion = () ->
   question = questions.currentQuestion()
   answer   = null
-  rl = readline.createInterface({input: process.stdin, output: process.stdout})
-  rl.question "Did You #{question} today? ", (_answer) =>
-    answer = _answer
-    questions.nextQuestion()
-    if questions.currentQuestion()
-      rl.close()
-      askQuestion()
-    else
-      rl.close()
-  rl.on 'close', (code) ->
-    askQuestion() unless answer
-    return ""
+  if question
+    rl = readline.createInterface({input: process.stdin, output: process.stdout})
+    rl.question "Did You #{question} today? ", (_answer) =>
+      answer = _answer
+      questions.nextQuestion()
+      if questions.currentQuestion()
+        rl.close()
+        askQuestion()
+      else
+        rl.close()
+    rl.on 'close', (code) ->
+      askQuestion() unless answer
+      return ""
 
 askQuestion()
