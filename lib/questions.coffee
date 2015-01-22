@@ -1,5 +1,4 @@
 io      = require("./nagIO")
-history = io.history()
 moment  = require("moment")
 NOW     = moment()
 
@@ -8,41 +7,58 @@ class Filter
     @filters = filters || {}
 
   inRange: (timestamp) ->
+    return false unless @testBetween()
+    return true  unless @testOccuredToday(timestamp)
+
+  testBetween: () ->
     if @filters.between
       #supports only am and pm now
       FORMATS = ['hh:mma', 'hha']
       start = moment(@filters.between[0], FORMATS)
       end   = moment(@filters.between[1], FORMATS)
       start <= NOW <= end
+    else
+      true
+
+  testOccuredToday: (timestamp) ->
+    timestamp &&
+    ( NOW.day()   == timestamp.day() &&
+    NOW.month() == timestamp.month() &&
+    NOW.year()  == timestamp.year())
 
 class Question
-  constructor: (q) ->
-    {@question} = q
-    @filter = new Filter(q.filters)
+  constructor: (args) ->
+    {@question, filters, @lastOccurance} = args
+    @filter = new Filter(filters)
 
   isRelevant: () ->
-    return true
-    for item in history
-      if item[1] == @question
-        return false unless @filter.inRange(item[0])
-    return true
+    @filter.inRange(@lastOccurance)
 
-class Questions
-  constructor: () ->
-    @questions = @_retrieveRelevantQuestionList()
-    @_currentQuestion = 0
+module.exports = class Questions
+  @load: (args) ->
+    {onReady} = args
+    io.loadHistory
+      onEnd: (history) ->
+        onReady(new Questions({history}))
+
+  constructor: (args) ->
+    {history} = args
+    @history           = history
+    @relevantQuestions = @_retrieveRelevantQuestionList()
+    @_currentQuestion  = 0
 
   _retrieveRelevantQuestionList: () ->
-    questions = io.loadQuestions().map (q) -> new Question(q)
-    questions.reduce ((memo, question) =>
+    @_questions = io.loadQuestions().map (q) => new Question(question: q.question, filters: q.filters, lastOccurance: @history[q.question])
+    @_questions.reduce ((memo, question) =>
       if question.isRelevant()
         memo.concat question
       else
         memo
     ), []
 
-  currentQuestion: () -> @questions[@_currentQuestion]?.question
+  currentQuestion: () -> @relevantQuestions[@_currentQuestion]?.question
   nextQuestion: () -> @_currentQuestion = @_currentQuestion + 1
   currentQuestionToS: () -> "> did you #{@currentQuestion()} today? "
-
-module.exports = new Questions()
+  logCurrent: () ->
+    timestamp = moment().format('YYYY-MM-DD')
+    io.logData("#{timestamp} #{@currentQuestion()}\n")
