@@ -7,7 +7,6 @@ class Filter
   constructor: (filters) ->
     @filters = filters || {}
 
-
   inRange: (timestamp) ->
     if @filters.between
       #supports only am and pm now
@@ -22,6 +21,7 @@ class Question
     @filter = new Filter(q.filters)
 
   isRelevant: () ->
+    return true
     for item in history
       if item[1] == @question
         return false unless @filter.inRange(item[0])
@@ -43,5 +43,6 @@ class Questions
 
   currentQuestion: () -> @questions[@_currentQuestion]?.question
   nextQuestion: () -> @_currentQuestion = @_currentQuestion + 1
+  currentQuestionToS: () -> "> did you #{@currentQuestion()} today? "
 
 module.exports = new Questions()

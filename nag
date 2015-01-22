@@ -1,25 +1,22 @@
 #! /usr/bin/env coffee
-fs        = require("fs")
-readline  = require("readline")
-Stream    = require("stream")
+fs                = require("fs")
+StubbornReadline  = require("./lib/stubbornReadline")
+Stream            = require("stream")
 
 questions = require("./lib/questions")
+process.exit(0) unless questions.currentQuestion()
 
-askQuestion = () ->
-  question = questions.currentQuestion()
-  answer   = null
-  if question
-    rl = readline.createInterface({input: process.stdin, output: process.stdout})
-    rl.question "Did You #{question} today? ", (_answer) =>
-      answer = _answer
-      questions.nextQuestion()
-      if questions.currentQuestion()
-        rl.close()
-        askQuestion()
-      else
-        rl.close()
-    rl.on 'close', (code) ->
-      askQuestion() unless answer
-      return ""
+onAnswer = (answer) ->
+  questions.nextQuestion()
+  process.exit(0) unless questions.currentQuestion()
+  readline.question(
+    question: questions.currentQuestionToS()
+    onAnswer: onAnswer
+  )
 
-askQuestion()
+readline  = new StubbornReadline()
+
+readline.question(
+  question: questions.currentQuestionToS()
+  onAnswer: onAnswer
+)
