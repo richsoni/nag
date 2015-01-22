@@ -1,6 +1,6 @@
-# Multiple Items
-(A) Read List of questions from a file, and ask each
-
-x # MVP
-x (A) save query for the day
-x (A) query reset at 12pm
+# features in lisp 1.0 milestone
+* [ ] nag ignore
+* [ ] nag edit
+* [ ] defaults file (nag-count, choose subset)
+* [ ] test flag
+* [ ] all flag

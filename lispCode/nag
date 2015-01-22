@@ -1,0 +1,38 @@
+#! /usr/bin/env clisp
+(setf mode nil)
+(setf *random-state* (make-random-state t))
+
+; bootstrap nag
+(defun home-path ()
+  (directory-namestring
+    (merge-pathnames 
+     (make-pathname
+      :directory '(:relative ""))
+     (user-homedir-pathname))))
+
+; "./lib/nag.lisp"
+(load (format nil "~Anag/lib/nag.lisp" (home-path)))
+
+;;process each task read in
+; "./nag.symlink/questions"
+(if (or (equal "TRUE" (getenv "NAG_IGNORE"))
+  (progn
+    (format t "bypassing nag~%")
+    (exit)))
+
+(defun nag ()
+  (mapcar #'process-task (get-tasks)))
+
+(defun nag-edit ()
+  (run-shell-command
+    (format nil "$EDITOR ~A/.nag/questions" (home-path))))
+
+(defun command (&optional (lst *args*))
+  (if (flagp (car lst))
+    (command (cdr lst))
+    (read-from-string (or (car lst) "NIL") t nil)))
+
+(case (command)
+      ('NIL (funcall 'nag))
+      ('edit (funcall 'nag-edit))
+      (t (format t "~A not an option~%" (car *args*))))

@@ -1,38 +1,28 @@
-#! /usr/bin/env clisp
-(setf mode nil)
-(setf *random-state* (make-random-state t))
+#! /usr/bin/env coffee
+fs          = require("fs")
+NagReadline = require("./lib/nagReadline")
+Stream      = require("stream")
+Questions   = require("./lib/questions")
 
-; bootstrap nag
-(defun home-path ()
-  (directory-namestring
-    (merge-pathnames 
-     (make-pathname
-      :directory '(:relative ""))
-     (user-homedir-pathname))))
+Questions.load
+  onReady: (questions) ->
+    process.exit(0) unless questions.currentQuestion()
 
-; "./lib/nag.lisp"
-(load (format nil "~Anag/lib/nag.lisp" (home-path)))
+    nextQuestion = () ->
+      questions.nextQuestion()
+      process.exit(0) unless questions.currentQuestion()
+      readline.question(
+        question: questions.currentQuestionToS()
+        onAnswer: onAnswer
+      )
 
-;;process each task read in
-; "./nag.symlink/questions"
-(if (equal "TRUE" (getenv "NAG_IGNORE"))
-  (progn
-    (format t "bypassing nag~%")
-    (exit)))
+    onAnswer = (answer) ->
+      questions.logCurrent() if answer == 'yes'
+      nextQuestion()
 
-(defun nag ()
-  (mapcar #'process-task (get-tasks)))
+    readline  = new NagReadline()
 
-(defun nag-edit ()
-  (run-shell-command
-    (format nil "$EDITOR ~A/.nag/questions" (home-path))))
-
-(defun command (&optional (lst *args*))
-  (if (flagp (car lst))
-    (command (cdr lst))
-    (read-from-string (or (car lst) "NIL") t nil)))
-
-(case (command)
-      ('NIL (funcall 'nag))
-      ('edit (funcall 'nag-edit))
-      (t (format t "~A not an option~%" (car *args*))))
+    readline.question(
+      question: questions.currentQuestionToS()
+      onAnswer: onAnswer
+    )
