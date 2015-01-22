@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test-watch": "mocha --watch test",
+    "testWatch": "mocha --watch test",
     "t": "npm run test",
-    "tw": "npm run test-watch"
+    "tw": "npm run testWatch"
   },
   "repository": {
     "type": "git",
