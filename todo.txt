@@ -1,4 +1,5 @@
 # features in lisp 1.0 milestone
+* [ ] add tests
 * [ ] nag ignore
 * [ ] nag edit
 * [ ] defaults file (nag-count, choose subset)

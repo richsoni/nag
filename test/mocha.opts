@@ -1,0 +1,5 @@
+--recursive
+--reporter spec
+-u tdd
+-R list
+--compilers coffee:coffee-script/register

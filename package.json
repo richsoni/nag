@@ -4,7 +4,10 @@
   "description": "and you thought yo mamma was a nag",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "test-watch": "mocha --watch test",
+    "t": "npm run test",
+    "tw": "npm run test-watch"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,8 @@
   "homepage": "https://github.com/richsoni/nag",
   "dependencies": {
     "moment": "^2.9.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1"
   }
 }
