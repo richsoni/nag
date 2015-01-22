@@ -1,7 +1,7 @@
 #! /usr/bin/env coffee
-fs                = require("fs")
-StubbornReadline  = require("./lib/stubbornReadline")
-Stream            = require("stream")
+fs          = require("fs")
+NagReadline = require("./lib/nagReadline")
+Stream      = require("stream")
 
 questions = require("./lib/questions")
 process.exit(0) unless questions.currentQuestion()
@@ -14,7 +14,7 @@ onAnswer = (answer) ->
     onAnswer: onAnswer
   )
 
-readline  = new StubbornReadline()
+readline  = new NagReadline()
 
 readline.question(
   question: questions.currentQuestionToS()

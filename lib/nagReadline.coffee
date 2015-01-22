@@ -1,13 +1,14 @@
 #! /usr/bin/env coffee
 readline  = require("readline")
 
-# Disable CTRL-D
+# Disable CTRL-D, CTRL-C
+# TODO need to forward if its not a close command
 ttyWrite  = readline.Interface.prototype._ttyWrite
 readline.Interface.prototype._ttyWrite = (s, key) ->
-  unless key.ctrl && key.name == 'd'
+  unless key.ctrl && (key.name == 'd' || key.name == 'c')
     ttyWrite.bind(@)(s, key)
 
-module.exports = class Readline
+module.exports = class NagReadline
   constructor: () ->
     @newReadline()
 
