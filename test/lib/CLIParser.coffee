@@ -16,3 +16,12 @@ suite 'Environment', ->
   test '$NAG_IGNORE', ->
     opts = new CLIParser(args: [], env: {NAG_IGNORE: 'true'})
     assert(opts.ignore == true, '$NAG_IGNORE == args.ignore')
+
+suite 'Global Flags', ->
+  test 'stern mode', ->
+    opts   = new CLIParser(args: ['--stern'])
+    assert(opts.flags.stern == true, '--stern turns on stern flag')
+    opts = new CLIParser(args: ['--no-stern'])
+    assert(opts.flags.stern == false, '--no-stern forces no stern')
+    optns  = new CLIParser(args: ['--stern', '--no-stern'])
+    assert(opts.flags.stern == false, 'last arg is the one that is active')

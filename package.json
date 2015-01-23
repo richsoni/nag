@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/richsoni/nag",
   "dependencies": {
+    "inflection": "^1.5.3",
     "moment": "^2.9.0"
   },
   "devDependencies": {
