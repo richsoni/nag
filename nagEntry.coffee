@@ -9,6 +9,7 @@ module.exports = class Nag
     if opt.interactive
       @cli()
 
+  @parser: require("path")
   cli: () ->
     NagReadline = require("./lib/nagReadline")
     Questions.load

@@ -1,5 +1,15 @@
 #! /usr/bin/env coffee
-Nag = require("./nagEntry.coffee")
-new Nag({
-  interactive: true
-})
+CLIParser = require("./lib/cliParser")
+Nag       = require("./nagEntry.coffee")
+args      = new CLIParser(process.argv.slice(2))
+
+switch args.command
+  when 'nag'
+    new Nag({
+      interactive: true
+    })
+  when 'edit'
+    spawn  = require('child_process').spawn
+    editor = process.env.EDITOR || 'vi'
+    child  = spawn(editor, ["#{process.env.HOME}/.nag/questions.coffee"], { stdio: 'inherit' })
+    child.on('exit', (e, code) ->)
