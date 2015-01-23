@@ -10,4 +10,5 @@ module.exports = [
   'duolingo'
   'journal': QUICK_CHECK
   'meditate': {between: [['11am', '4pm'], BEFORE_BED]}
+  'read 200 pages of MMTG'
 ]

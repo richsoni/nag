@@ -5,4 +5,5 @@
 * [ ] defaults file (nag-count, choose subset)
 * [ ] test flag
 * [ ] all flag
+* [ ] accept cron tab format
 * [ ] update readme
