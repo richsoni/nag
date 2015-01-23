@@ -3,15 +3,17 @@ Stream      = require("stream")
 Questions   = require("./lib/questions")
 
 module.exports = class Nag
-  constructor: (opt = {}) ->
-    if opt.interactive
+  constructor: (params = {}) ->
+    {interactive, @opts} = params
+    @opts ||= {}
+    if interactive
       @cli()
 
   @parser: require("path")
   cli: () ->
     NagReadline = require("./lib/nagReadline")
     Questions.load
-      onReady: (questions) ->
+      onReady: (questions) =>
         process.exit(0) unless questions.currentQuestion()
 
         nextQuestion = () ->
@@ -22,11 +24,11 @@ module.exports = class Nag
             onAnswer: onAnswer
           )
 
-        onAnswer = (answer) ->
+        onAnswer = (answer) =>
           questions.logCurrent() if answer == 'yes'
           nextQuestion()
 
-        readline  = new NagReadline()
+        readline  = new NagReadline({stern: @opts.flags.stern})
 
         readline.question(
           question: questions.currentQuestionToS()

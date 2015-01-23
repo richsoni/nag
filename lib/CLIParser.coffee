@@ -29,7 +29,7 @@ module.exports = class CLIParser
   _flagToKey: (flag) -> inflection.camelize(flag.replace('-', '_'), true)
 
   _setCommand: () ->
-    switch @_args.length
+    switch @commands.length
       when 0 then @command = 'nag'
       when 1 then @command = @_args[0]
 
