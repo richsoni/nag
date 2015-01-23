@@ -1,5 +1,8 @@
 require("./globals")
+Nag = require("../nagEntry")
 
-suite 'mocha', ->
-  test 'test', ->
-    assert(1 == 1)
+suite 'Environment', ->
+  test '$NAG_IGNORE', ->
+    process.env.NAG_IGNORE=true
+    nag = new Nag()
+    assert(!!nag._started == false)

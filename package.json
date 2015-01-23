@@ -2,7 +2,7 @@
   "name": "nag",
   "version": "1.0.0",
   "description": "and you thought yo mamma was a nag",
-  "main": "index.js",
+  "main": "nagEntry.coffee",
   "scripts": {
     "test": "mocha",
     "testWatch": "mocha --watch test",
