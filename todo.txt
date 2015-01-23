@@ -2,8 +2,8 @@
 * [x] add tests
 * [x] nag ignore
 * [x] nag edit
-* [ ] defaults file (nag-count, choose subset)
 * [ ] test flag
 * [ ] all flag
-* [ ] accept cron tab format
+* [ ] questions should accept cron tab format
+* [ ] defaults file (nag-count, choose subset)
 * [ ] update readme

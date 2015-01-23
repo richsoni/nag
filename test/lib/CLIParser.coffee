@@ -3,11 +3,16 @@ CLIParser = require("../../lib/CLIParser")
 
 suite 'commands', ->
   test 'nag', ->
-    args = new CLIParser([])
-    assert args.command == 'nag'
-    args = new CLIParser(['nag'])
-    assert args.command == 'nag'
+    opts = new CLIParser(args: [])
+    assert opts.command == 'nag', 'no args == nag'
+    opts = new CLIParser(args: ['nag'])
+    assert opts.command == 'nag', 'nag == nag'
 
   test 'edit', ->
-    args = new CLIParser(['edit'])
-    assert args.command == 'edit'
+    opts = new CLIParser(args: ['edit'])
+    assert opts.command == 'edit', 'edit == edit'
+
+suite 'Environment', ->
+  test '$NAG_IGNORE', ->
+    opts = new CLIParser(args: [], env: {NAG_IGNORE: 'true'})
+    assert(opts.ignore == true, '$NAG_IGNORE == args.ignore')

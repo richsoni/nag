@@ -4,8 +4,6 @@ Questions   = require("./lib/questions")
 
 module.exports = class Nag
   constructor: (opt = {}) ->
-    return if process.env.NAG_IGNORE
-    @_started = true
     if opt.interactive
       @cli()
 
