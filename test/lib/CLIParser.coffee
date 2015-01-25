@@ -12,6 +12,10 @@ suite 'commands', ->
     opts = new CLIParser(args: ['edit'])
     assert opts.command == 'edit', 'edit == edit'
 
+  test 'config', ->
+    opts = new CLIParser(args: ['config'])
+    assert opts.command == 'config', 'config == config'
+
 suite 'Environment', ->
   test '$NAG_IGNORE', ->
     opts = new CLIParser(args: [], env: {NAG_IGNORE: 'true'})

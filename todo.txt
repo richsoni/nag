@@ -3,6 +3,7 @@
 * [x] nag ignore
 * [x] nag edit
 * [x] test flag
+* [x] config command
 * [ ] all flag
 * [ ] questions should accept cron tab format
 * [ ] defaults file (nag-count, choose subset)
