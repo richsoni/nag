@@ -30,7 +30,6 @@ module.exports = class CLIParser
 
   _setCommand: () ->
     switch @commands.length
-      when 0 then @command = null
       when 1 then @command = @_args[0]
 
   _setEnvOptions: () ->

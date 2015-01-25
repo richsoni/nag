@@ -4,7 +4,7 @@ CLIParser = require("../../lib/CLIParser")
 suite 'commands', ->
   test 'nag', ->
     opts = new CLIParser(args: [])
-    assert opts.command == null, 'no args == null'
+    assert opts.hasOwnProperty('command') == false, 'no args == null'
     opts = new CLIParser(args: ['nag'])
     assert opts.command == 'nag', 'nag == nag'
 
