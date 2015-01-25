@@ -6,7 +6,7 @@ module.exports =
   loadHistory: (args) ->
     {onEnd} = args
     tasks = {}
-    instream  = fs.createReadStream("/Users/rich/.nag/data")
+    instream  = fs.createReadStream("/Users/rich/.config/nag/completed")
     outstream = new stream
     rl = readline.createInterface(instream, outstream)
     rl.on 'line', (line) ->
@@ -21,7 +21,7 @@ module.exports =
       onEnd(tasks)
 
   loadQuestions: () ->
-    data = require("/Users/rich/.nag/questions")
+    data = require("/Users/rich/.config/nag/questions.coffee")
     data.map (question) ->
       switch typeof question
         when 'string' then {question: question, filters: null}
@@ -30,4 +30,4 @@ module.exports =
           {question: name, filters: question[name]}
 
   logData: (data) ->
-    fs.appendFileSync '/Users/rich/.nag/data', data
+    fs.appendFileSync '/Users/rich/.config/nag/completed', data

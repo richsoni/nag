@@ -15,11 +15,11 @@ then add nag to your path.
 
 ### Setup
 
-Add questions to .nag/questions
+Add questions to .config/nag/questions.coffee
 
 it will nag everytime you run the ```nag``` command until you tell it you finished
 
-The answers get stored in .nag/data
+The answers get stored in .config/nag/completed
 
 # Arguments
 

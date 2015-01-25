@@ -1,15 +1,17 @@
 #! /usr/bin/env coffee
-CLIParser = require("./lib/cliParser")
-Nag       = require("./nagEntry.coffee")
+CLIParser = require("../lib/cliParser")
+Nag       = require("../index")
 opts      = new CLIParser(args: process.argv.slice(2), env: process.env)
 
 switch opts.command
+
   when 'nag'
     unless opts.ignore
       new Nag({
         interactive: true
         opts: opts
       })
+
   when 'edit'
     spawn  = require('child_process').spawn
     editor = process.env.EDITOR || 'vi'

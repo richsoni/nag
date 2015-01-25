@@ -1,6 +1,4 @@
 #! /usr/bin/env ruby
 
-`rm ~/.nag`
-`rm ~/.nagrc`
-`ln -s #{Dir.pwd}/nag.symlink ~/.nag`
-`ln -s #{Dir.pwd}/nagrc.symlink ~/.nagrc`
+`rm ~/.config/nag`
+`ln -s #{Dir.pwd}/config-template ~/.config/nag`
