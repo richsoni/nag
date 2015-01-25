@@ -1,19 +1,19 @@
 #! /usr/bin/env coffee
-CLIParser = require("../lib/cliParser")
-Nag       = require("../index")
-opts      = new CLIParser(args: process.argv.slice(2), env: process.env)
+Nag           = require("../index")
+ConfigBuilder = require("../lib/configBuilder")
+config        = ConfigBuilder.build()
 
-switch opts.command
+switch config.command
 
   when 'nag'
-    unless opts.ignore
+    unless config.ignore
       new Nag({
         interactive: true
-        opts: opts
+        opts: config
       })
 
   when 'edit'
     spawn  = require('child_process').spawn
     editor = process.env.EDITOR || 'vi'
-    child  = spawn(editor, ["#{process.env.HOME}/.nag/questions.coffee"], { stdio: 'inherit' })
+    child  = spawn(editor, ["#{process.env.HOME}/.config/nag/questions.coffee"], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)
