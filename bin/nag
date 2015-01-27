@@ -23,4 +23,3 @@ switch config.command
     editor = process.env.EDITOR || 'vi'
     child  = spawn(editor, ["#{process.env.HOME}/.config/nag/config.coffee"], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)
-

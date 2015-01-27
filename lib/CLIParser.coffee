@@ -1,36 +1,27 @@
 # ../test/lib/CLIParser.coffee
+minimist   = require("minimist")
 inflection = require("inflection")
-FLAG = /^--(.*)$/
-FLAGOFF = /^no-(.*)$/
+ALIASES = {
+  'n': 'number-of-questions'
+  'r': 'randomize-questions'
+}
 
 module.exports = class CLIParser
   constructor: (params = {}) ->
-    @_args     = params.args || []
-    @_env      = params.env  || []
-    @_setCommandsAndFlags()
-    @_setCommand()
+    @_args     = minimist(params.args, {alias: ALIASES})
+    @command   = @_args._[0]
+    @flags     = @_setFlags()
+    @_env      = params.env || []
     @_setEnvOptions()
 
-  _setCommandsAndFlags: () ->
-    @commands = []
-    @flags    = {}
-    @_args.forEach (arg) =>
-      if res = arg.match(FLAG)
-        flag = res[1]
-        if res = flag.match(FLAGOFF)
-          flag = res[1]
-          value = false
-        else
-          value = true
-        @flags[@_flagToKey(flag)] = value
-      else
-        @commands.push(arg)
+  _setFlags: () ->
+    Object.keys(@_args).reduce(((memo, key) =>
+      if key != '_'
+        memo[@_flagToKey(key)] = @_args[key]
+      memo
+    ),{})
 
-  _flagToKey: (flag) -> inflection.camelize(flag.replace('-', '_'), true)
-
-  _setCommand: () ->
-    switch @commands.length
-      when 1 then @command = @_args[0]
+  _flagToKey: (flag) -> inflection.camelize(flag.replace(/-/g, '_', 'i'), true)
 
   _setEnvOptions: () ->
     @ignore = @_env.NAG_IGNORE == 'true'

@@ -4,7 +4,7 @@ CLIParser = require("../../lib/CLIParser")
 suite 'commands', ->
   test 'nag', ->
     opts = new CLIParser(args: [])
-    assert opts.hasOwnProperty('command') == false, 'no args == null'
+    assert !!opts.command == false, 'no args == null'
     opts = new CLIParser(args: ['nag'])
     assert opts.command == 'nag', 'nag == nag'
 
@@ -29,3 +29,17 @@ suite 'Global Flags', ->
     assert(opts.flags.stern == false, '--no-stern forces no stern')
     optns  = new CLIParser(args: ['--stern', '--no-stern'])
     assert(opts.flags.stern == false, 'last arg is the one that is active')
+
+  test 'Number of Questions', ->
+    opts   = new CLIParser(args: ['--number-of-questions=3'])
+    assert(opts.flags.numberOfQuestions == 3, '--number-of-questions=3 sets option to 3')
+    opts   = new CLIParser(args: ['-n5'])
+    assert(opts.flags.numberOfQuestions == 5, '-n5 sets option to 5')
+    opts   = new CLIParser(args: ['--all'])
+    assert(opts.flags.all == true, 'all')
+
+  test 'Randomize Questions', ->
+    opts   = new CLIParser(args: ['--randomize-questions'])
+    assert(opts.flags.randomizeQuestions == true, '--randomize questions')
+    opts   = new CLIParser(args: ['-r'])
+    assert(opts.flags.randomizeQuestions == true, '--randomize questions is the same as -r')
