@@ -8,3 +8,4 @@ module.exports =
     stern: false
     shuffle: true
     numberOfQuestions: 3
+    all: false

@@ -34,3 +34,12 @@ suite 'Setup', ->
       onReady: (questions) ->
         assert(questions.relevantQuestions.length == 3, 'control number of questions asked')
         done()
+
+  test 'all', (done) ->
+    #TODO requires questions (there should be a fixture for this
+    Questions.load
+      number:  1
+      all: true
+      onReady: (questions) ->
+        assert(questions.relevantQuestions.length > 1, 'all will override number')
+        done()

@@ -4,6 +4,7 @@ inflection = require("inflection")
 ALIASES = {
   'n': 'number-of-questions'
   's': 'shuffle'
+  'a': 'all'
 }
 
 module.exports = class CLIParser

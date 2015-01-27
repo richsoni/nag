@@ -15,7 +15,8 @@ module.exports = class Nag
     NagReadline = require("./lib/nagReadline")
     Questions.load
       shuffle: @opts.flags.shuffle
-      number: @opts.flags.numberOfQuestions
+      number:  @opts.flags.numberOfQuestions
+      all:     @opts.flags.all
       onReady: (questions) =>
         process.exit(0) unless questions.currentQuestion()
 
