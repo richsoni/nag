@@ -37,13 +37,13 @@ class Question
 
 module.exports = class Questions
   @load: (args) ->
-    {onReady, shuffle} = args
+    {onReady, shuffle, number} = args
     io.loadHistory
       onEnd: (history) ->
-        onReady(new Questions({history, shuffle}))
+        onReady(new Questions({history, shuffle, number}))
 
   constructor: (args) ->
-    {@history, @shuffle} = args
+    {@history, @shuffle, @number} = args
     @_loadQuestions()
     @relevantQuestions = @_selectQuestionList()
 
@@ -57,11 +57,11 @@ module.exports = class Questions
     ), []
 
   _selectQuestionList: () ->
-    @_currentQuestion  = 0
-    if @shuffle
-      shuffleArray(@_questions, copy:true)
-    else
-      @_questions
+    @_currentQuestion = 0
+    questions = @_questions
+    questions = shuffleArray(@_questions, copy:true) if @shuffle
+    questions = questions.slice(0,@number) if @number
+    return questions
 
 
   currentQuestion: () -> @relevantQuestions[@_currentQuestion]?.question
