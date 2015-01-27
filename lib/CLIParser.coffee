@@ -3,7 +3,7 @@ minimist   = require("minimist")
 inflection = require("inflection")
 ALIASES = {
   'n': 'number-of-questions'
-  'r': 'randomize-questions'
+  's': 'shuffle'
 }
 
 module.exports = class CLIParser

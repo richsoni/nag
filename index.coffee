@@ -1,11 +1,12 @@
 fs          = require("fs")
 Stream      = require("stream")
 Questions   = require("./lib/questions")
+ConfigBuilder = require("./lib/configBuilder")
 
 module.exports = class Nag
   constructor: (params = {}) ->
     {interactive, @opts} = params
-    @opts ||= {}
+    @opts ||= ConfigBuilder.build()
     if interactive
       @cli()
 
@@ -13,6 +14,7 @@ module.exports = class Nag
   cli: () ->
     NagReadline = require("./lib/nagReadline")
     Questions.load
+      shuffle: @opts.flags.shuffle
       onReady: (questions) =>
         process.exit(0) unless questions.currentQuestion()
 

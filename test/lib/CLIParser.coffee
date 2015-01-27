@@ -39,7 +39,7 @@ suite 'Global Flags', ->
     assert(opts.flags.all == true, 'all')
 
   test 'Randomize Questions', ->
-    opts   = new CLIParser(args: ['--randomize-questions'])
-    assert(opts.flags.randomizeQuestions == true, '--randomize questions')
-    opts   = new CLIParser(args: ['-r'])
-    assert(opts.flags.randomizeQuestions == true, '--randomize questions is the same as -r')
+    opts   = new CLIParser(args: ['--shuffle'])
+    assert(opts.flags.shuffle == true, '--shuffle questions')
+    opts   = new CLIParser(args: ['-s'])
+    assert(opts.flags.shuffle == true, '--shuffle questions is the same as -s')

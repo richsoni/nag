@@ -22,7 +22,8 @@
   "dependencies": {
     "inflection": "^1.5.3",
     "minimist": "^1.1.0",
-    "moment": "^2.9.0"
+    "moment": "^2.9.0",
+    "shuffle-array": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1"

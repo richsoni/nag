@@ -1,6 +1,7 @@
-io      = require("./nagIO")
-moment  = require("moment")
-NOW     = moment()
+io           = require("./nagIO")
+moment       = require("moment")
+shuffleArray = require("shuffle-array")
+NOW          = moment()
 
 class Filter
   constructor: (filters) ->
@@ -36,28 +37,36 @@ class Question
 
 module.exports = class Questions
   @load: (args) ->
-    {onReady} = args
+    {onReady, shuffle} = args
     io.loadHistory
       onEnd: (history) ->
-        onReady(new Questions({history}))
+        onReady(new Questions({history, shuffle}))
 
   constructor: (args) ->
-    {history} = args
-    @history           = history
-    @relevantQuestions = @_retrieveRelevantQuestionList()
-    @_currentQuestion  = 0
+    {@history, @shuffle} = args
+    @_loadQuestions()
+    @relevantQuestions = @_selectQuestionList()
 
-  _retrieveRelevantQuestionList: () ->
-    @_questions = io.loadQuestions().map (q) => new Question(question: q.question, filters: q.filters, lastOccurance: @history[q.question])
-    @_questions.reduce ((memo, question) =>
+  _loadQuestions: () ->
+    questions = io.loadQuestions().map (q) => new Question(question: q.question, filters: q.filters, lastOccurance: @history[q.question])
+    @_questions = questions.reduce ((memo, question) =>
       if question.isRelevant()
         memo.concat question
       else
         memo
     ), []
 
+  _selectQuestionList: () ->
+    @_currentQuestion  = 0
+    if @shuffle
+      shuffleArray(@_questions, copy:true)
+    else
+      @_questions
+
+
   currentQuestion: () -> @relevantQuestions[@_currentQuestion]?.question
-  nextQuestion: () -> @_currentQuestion = @_currentQuestion + 1
+  nextQuestion: () ->
+    @_currentQuestion = @_currentQuestion + 1
   currentQuestionToS: () -> "> did you #{@currentQuestion()} today? "
   logCurrent: () ->
     timestamp = moment().format('YYYY-MM-DD')

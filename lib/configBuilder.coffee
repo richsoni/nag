@@ -12,7 +12,7 @@ module.exports = class ConfigBuilder
   _build: () ->
     keys = ['command']
     keys.forEach (key) =>
-      if @_cliOptions.hasOwnProperty(key)
+      if @_cliOptions.hasOwnProperty(key) && !!@_cliOptions[key] != false
         @[key] = @_cliOptions[key]
       else if @_config.hasOwnProperty(key)
         @[key] = @_config[key]
