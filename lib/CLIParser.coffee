@@ -1,15 +1,11 @@
 # ../test/lib/CLIParser.coffee
 minimist   = require("minimist")
 inflection = require("inflection")
-ALIASES = {
-  'n': 'number-of-questions'
-  's': 'shuffle'
-  'a': 'all'
-}
+C          = require("./constants")
 
 module.exports = class CLIParser
   constructor: (params = {}) ->
-    @_args     = minimist(params.args, {alias: ALIASES})
+    @_args     = minimist(params.args, {alias: C.CLI.ALIASES})
     @command   = @_args._[0]
     @flags     = @_setFlags()
     @_env      = params.env || []
@@ -25,4 +21,4 @@ module.exports = class CLIParser
   _flagToKey: (flag) -> inflection.camelize(flag.replace(/-/g, '_', 'i'), true)
 
   _setEnvOptions: () ->
-    @ignore = @_env.NAG_IGNORE == 'true'
+    @ignore = @_env.NAG_IGNORE == C.SWITCHES.NAG_IGNORE

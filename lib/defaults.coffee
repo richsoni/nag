@@ -1,9 +1,11 @@
+C = require("./constants")
+
 module.exports =
-  command: 'quiz'
+  command: C.COMMANDS.QUIZ
   affirmations:   ['yes', 'y']
   path:
-    questions: '~/.config/nag/questions.coffee'
-    completed: '~/.config/nag/completed'
+    questions: C.PATHS.QUESTIONS
+    completed: C.PATHS.COMPLETED
   flags:
     stern: false
     shuffle: true

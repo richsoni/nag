@@ -2,11 +2,13 @@ fs = require('fs')
 readline = require('readline')
 stream = require('stream')
 moment = require("moment")
+C = require("./constants")
+
 module.exports =
   loadHistory: (args) ->
     {onEnd} = args
     tasks = {}
-    instream  = fs.createReadStream("/Users/rich/.config/nag/completed")
+    instream  = fs.createReadStream(C.PATHS.COMPLETED)
     outstream = new stream
     rl = readline.createInterface(instream, outstream)
     rl.on 'line', (line) ->
@@ -21,7 +23,7 @@ module.exports =
       onEnd(tasks)
 
   loadQuestions: () ->
-    data = require("/Users/rich/.config/nag/questions.coffee")
+    data = require(C.PATHS.QUESTIONS)
     data.map (question) ->
       switch typeof question
         when 'string' then {question: question, filters: null}
@@ -30,4 +32,4 @@ module.exports =
           {question: name, filters: question[name]}
 
   logData: (data) ->
-    fs.appendFileSync '/Users/rich/.config/nag/completed', data
+    fs.appendFileSync C.PATHS.COMPLETED, data

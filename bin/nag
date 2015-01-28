@@ -2,30 +2,30 @@
 Nag           = require("../index")
 ConfigBuilder = require("../lib/configBuilder")
 config        = ConfigBuilder.build()
+C             = require("../lib/constants")
 
 switch config.command
 
-  when 'quiz'
+  when C.COMMANDS.QUIZ
     unless config.ignore
       new Nag({
         interactive: true
         opts: config
       })
 
-  when 'edit'
+  when C.COMMANDS.EDIT
     spawn  = require('child_process').spawn
-    editor = process.env.EDITOR || 'vi'
-    child  = spawn(editor, ["#{process.env.HOME}/.config/nag/questions.coffee"], { stdio: 'inherit' })
+    editor = process.env.EDITOR || C.DEFAULTS.EDITOR
+    child  = spawn(editor, [C.PATHS.QUESTIONS], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)
 
-  when 'config'
+  when C.COMMANDS.CONFIG
     spawn  = require('child_process').spawn
-    editor = process.env.EDITOR || 'vi'
-    child  = spawn(editor, ["#{process.env.HOME}/.config/nag/config.coffee"], { stdio: 'inherit' })
+    editor = process.env.EDITOR || C.DEFAULTS.EDITOR
+    child  = spawn(editor, [C.PATHS.CONFIG], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)
 
-  when 'help'
+  when C.COMMANDS.HELP
     spawn  = require('child_process').spawn
     child  = spawn('cat', ["./doc/index"], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)
-
