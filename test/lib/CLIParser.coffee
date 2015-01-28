@@ -1,24 +1,14 @@
 require("../globals")
 CLIParser = require("../../lib/CLIParser")
+C         = require("../../lib/constants")
 
 suite 'commands', ->
-  test 'quiz', ->
+  test 'all commands', ->
     opts = new CLIParser(args: [])
     assert !!opts.command == false, 'no args == null'
-    opts = new CLIParser(args: ['quiz'])
-    assert opts.command == 'quiz', 'quiz == quiz'
-
-  test 'help', ->
-    opts = new CLIParser(args: ['help'])
-    assert opts.command == 'help', 'help == help'
-
-  test 'edit', ->
-    opts = new CLIParser(args: ['edit'])
-    assert opts.command == 'edit', 'edit == edit'
-
-  test 'config', ->
-    opts = new CLIParser(args: ['config'])
-    assert opts.command == 'config', 'config == config'
+    for KEY, val of C.COMMANDS
+      opts = new CLIParser(args: [val])
+      assert opts.command == val, "#{val} == #{val}"
 
 suite 'Environment', ->
   test '$NAG_IGNORE', ->
