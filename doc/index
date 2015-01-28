@@ -14,4 +14,4 @@ Specify configs in the ini-formatted file:
 or on the command line via: npm <command> --key value
 Config info can be viewed via: npm help config
 
-npm@2.1.18 /usr/local/lib/node_modules/npm
+nag@1.0.0 ~/nag/bin/nag
