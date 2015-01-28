@@ -4,6 +4,7 @@ ConfigBuilder = require("../lib/configBuilder")
 C             = require("../lib/constants")
 HelpHelper    = require("../lib/helpHelper")
 config        = ConfigBuilder.build()
+helpHelper    = new HelpHelper()
 
 switch config.command
 
@@ -28,5 +29,5 @@ switch config.command
 
   when C.COMMANDS.HELP
     spawn  = require('child_process').spawn
-    child  = spawn('cat', ["./doc/index"], { stdio: 'inherit' })
+    child  = spawn('cat', [helpHelper.path], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)

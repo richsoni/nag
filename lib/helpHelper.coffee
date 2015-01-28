@@ -1,2 +1,4 @@
+C = require("./constants")
 module.exports = class HelpHelper
-  constructor: () ->
+  constructor: (config) ->
+    @path = "#{C.PATHS.HELP.QUICK_DIR}/nag"
