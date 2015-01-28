@@ -1,8 +1,9 @@
 #! /usr/bin/env coffee
 Nag           = require("../index")
 ConfigBuilder = require("../lib/configBuilder")
-config        = ConfigBuilder.build()
 C             = require("../lib/constants")
+HelpHelper    = require("../lib/helpHelper")
+config        = ConfigBuilder.build()
 
 switch config.command
 

@@ -1,3 +1,5 @@
+home = process.env.HOME
+
 C = {}
 C.COMMANDS = {}
 C.COMMANDS.HELP   = 'help'
@@ -16,10 +18,16 @@ C.DEFAULTS = {}
 C.DEFAULTS.EDITOR = 'vi'
 
 C.PATHS = {}
-C.PATHS.QUESTIONS = "#{process.env.HOME}/.config/nag/questions.coffee"
-C.PATHS.COMPLETED = "#{process.env.HOME}/.config/nag/completed"
-C.PATHS.CONFIG    = "#{process.env.HOME}/.config/nag/config.coffee"
+C.PATHS.CONFIG_DIR = "#{home}/.config/nag"
+C.PATHS.QUESTIONS  = "#{C.PATHS.CONFIG_DIR}/questions.coffee"
+C.PATHS.COMPLETED  = "#{C.PATHS.CONFIG_DIR}/completed"
+C.PATHS.CONFIG     = "#{C.PATHS.CONFIG_DIR}/config.coffee"
+
+C.PATHS.HELP = {}
+C.PATHS.HELP.QUICK_DIR   = "#{home}/nag/doc/quick"
+C.PATHS.HELP.MAN_DIR     = "#{home}/nag/doc/man"
 
 C.SWITCHES = {}
 C.SWITCHES.NAG_IGNORE = 'true'
+
 module.exports = C
