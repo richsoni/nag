@@ -14,7 +14,7 @@ CLI =
 suite 'Config Builder', ->
   test 'defaults', ->
     config = ConfigBuilder.build({config: {}, cliOptions: {}})
-    assert config.command     == 'nag', 'nag expected to be default command'
+    assert config.command     == 'quiz', 'quiz expected to be default command'
     assert config.flags.stern == false, 'stern expected to be false'
 
   test 'config options', ->

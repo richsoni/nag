@@ -1,5 +1,5 @@
 module.exports =
-  default: 'nag'
+  default: 'quiz'
   paths:
     questions: '~/.config/nag/questions.coffee'
     completed: '~/.config/nag/completed'

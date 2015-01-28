@@ -2,11 +2,15 @@ require("../globals")
 CLIParser = require("../../lib/CLIParser")
 
 suite 'commands', ->
-  test 'nag', ->
+  test 'quiz', ->
     opts = new CLIParser(args: [])
     assert !!opts.command == false, 'no args == null'
-    opts = new CLIParser(args: ['nag'])
-    assert opts.command == 'nag', 'nag == nag'
+    opts = new CLIParser(args: ['quiz'])
+    assert opts.command == 'quiz', 'quiz == quiz'
+
+  test 'help', ->
+    opts = new CLIParser(args: ['help'])
+    assert opts.command == 'help', 'help == help'
 
   test 'edit', ->
     opts = new CLIParser(args: ['edit'])

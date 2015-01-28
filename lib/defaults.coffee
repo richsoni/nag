@@ -1,5 +1,5 @@
 module.exports =
-  command: 'nag'
+  command: 'quiz'
   affirmations:   ['yes', 'y']
   path:
     questions: '~/.config/nag/questions.coffee'

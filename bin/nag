@@ -5,7 +5,7 @@ config        = ConfigBuilder.build()
 
 switch config.command
 
-  when 'nag'
+  when 'quiz'
     unless config.ignore
       new Nag({
         interactive: true
@@ -23,3 +23,10 @@ switch config.command
     editor = process.env.EDITOR || 'vi'
     child  = spawn(editor, ["#{process.env.HOME}/.config/nag/config.coffee"], { stdio: 'inherit' })
     child.on('exit', (e, code) ->)
+
+  when 'help'
+    spawn  = require('child_process').spawn
+    pager  = process.env.PAGER || 'less'
+    child  = spawn(pager, ["./doc/index"], { stdio: 'inherit' })
+    child.on('exit', (e, code) ->)
+
