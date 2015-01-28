@@ -2,16 +2,20 @@ home = process.env.HOME
 
 C = {}
 C.COMMANDS = {}
-C.COMMANDS.HELP   = 'help'
 C.COMMANDS.EDIT   = 'edit'
 C.COMMANDS.CONFIG = 'config'
 C.COMMANDS.QUIZ   = 'quiz'
+
+C.HELP_COMMANDS = {}
+C.HELP_COMMANDS.LONG  = 'help'
+C.HELP_COMMANDS.QUICK = 'help-quick'
 
 C.CLI = {}
 C.CLI.ALIASES = {
   'n': 'number-of-questions'
   's': 'shuffle'
   'a': 'all'
+  'h': 'help'
 }
 
 C.DEFAULTS = {}

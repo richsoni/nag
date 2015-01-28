@@ -6,10 +6,17 @@ C          = require("./constants")
 module.exports = class CLIParser
   constructor: (params = {}) ->
     @_args     = minimist(params.args, {alias: C.CLI.ALIASES})
-    @command   = @_args._[0]
+    @command   = @_args._.join(' ')
     @flags     = @_setFlags()
+    @_quickHelpSpecialCase()
     @_env      = params.env || []
     @_setEnvOptions()
+
+  _quickHelpSpecialCase: () ->
+    if @flags.help
+      @command = "#{C.HELP_COMMANDS.QUICK} #{@command}"
+    else if @command == C.HELP_COMMANDS.LONG
+      @command = C.HELP_COMMANDS.QUICK
 
   _setFlags: () ->
     Object.keys(@_args).reduce(((memo, key) =>

@@ -37,3 +37,13 @@ suite 'Global Flags', ->
     assert(opts.flags.shuffle == true, '--shuffle questions')
     opts   = new CLIParser(args: ['-s'])
     assert(opts.flags.shuffle == true, '--shuffle questions is the same as -s')
+
+suite 'Help', ->
+  test 'help is joined with a string', () ->
+    opts   = new CLIParser(args: ['help', 'nag'])
+    assert(opts.command == "#{C.HELP_COMMANDS.LONG} nag", 'help joins space')
+
+  test '-h proxies to quick help command', () ->
+    opts   = new CLIParser(args: ['quiz', '-h'])
+    assert(opts.command == "#{C.HELP_COMMANDS.QUICK} quiz", 'quickhelp')
+
