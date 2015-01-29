@@ -53,7 +53,7 @@ Settings from this file have a priority that is higher than defaults, but lower 
 .SH SEE ALSO
 .RS 0
 .IP \(bu 2
-nag help config
+nag help edit
 .IP \(bu 2
 nag help quiz
 .IP \(bu 2
