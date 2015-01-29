@@ -29,6 +29,7 @@ switch config.command
   else
     helpHelper = new HelpHelper(config.command)
     if helpHelper.isHelp
-      spawn  = require('child_process').spawn
-      child  = spawn('cat', [helpHelper.path()], { stdio: 'inherit' })
+      spawn   = require('child_process').spawn
+      command = if helpHelper.isQuick then 'cat' else 'man'
+      child   = spawn(command, [helpHelper.path()], { stdio: 'inherit' })
       child.on('exit', (e, code) ->)

@@ -1,0 +1,131 @@
+.TH "NAG\-EDIT" "1" "January 2015" "" ""
+.SH "NAME"
+\fBnag-edit\fR \- Edit Nag Questions
+.SH SYNOPSIS
+.P
+.RS 2
+.nf
+nag edit
+.fi
+.RE
+.SH DESCRIPTION
+.P
+Edits the nag questions file which can be specified in the nag configuration file.
+By default this file is locatated at ~/.config/nag/questions.coffee.
+
+.SH CONFIGURATION
+
+The environment variable $EDITOR is used to open the file.
+If this variable is not set vi will be used.
+
+.SH EXAMPLES
+
+.IP \(bu 2
+\fBnag edit\fR:
+  Opens the questions file resolved by nag
+
+.SH QUESTIONS FILE
+
+The questions file should prepare a CommonJS module containing an array of questions to be used within the calling program.
+When a command requires use of the questions file it will evaluate it at runtime.
+As such any valid coffeescript can be used to produce the array that the requiring program expects.
+
+A barebones file would return just an empty array.
+
+\fBexample\fR:
+.if n \{\
+.RS 4
+.\}
+.nf
+module.exports = []
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+
+Entrees in the array can be as simple as a list of strings.
+These strings represent tasks that need to be completed daily.
+
+\fBexample\fR:
+.if n \{\
+.RS 4
+.\}
+.nf
+module.exports = [
+  'beep'
+  'boop'
+]
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+
+Questions can optionally be an object.
+The objects key is always the question text.
+The value can be a \fIrange\f
+
+\fBexample\fR:
+.if n \{\
+.RS 4
+.\}
+.nf
+module.exports = [
+  'beep'
+  'boop': ['10pm', '11:59pm']
+]
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+
+The value of questions can also be an object.
+This object exposes a more controlled detail on the question.
+
+\fBbetween:\fR
+The \fIbetween\fR option accepts an array of ranges in which the question will be deemed relevant.
+
+
+The following example leverages the between option to select 'boop' only from 10am-11am and 1pm-2pm.
+\fBexample\fR:
+.if n \{\
+.RS 4
+.\}
+.nf
+module.exports = [
+  'beep'
+  'boop':{
+    between: ['10am','11am'],['1pm','2pm']
+  }
+]
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+
+
+.SH Ranges
+
+Questions can have time ranges.
+I time range is an array with 2 elements.
+
+RANGE: [startTime, endTime]
+
+Times are parsed with moment.js, but only support the following formats:
+FORMATS = ['hh:mma', 'hha']
+
+Open an issue on github if you require another format.
+
+.SH SEE ALSO
+.RS 0
+.IP \(bu 2
+nag help config
+.IP \(bu 2
+nag help quiz
+.IP \(bu 2
+nag help nag
+.RE
+

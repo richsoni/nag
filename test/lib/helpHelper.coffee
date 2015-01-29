@@ -27,12 +27,12 @@ suite 'help helper', ->
 suite 'help documentation', () ->
   test 'all commands have quick help', () ->
     for KEY, val of C.COMMANDS
-      hh = new HelpHelper("quick-help #{val}")
+      hh = new HelpHelper("help-quick #{val}")
       try
         fs.statSync(hh.path())
         assert true == true
       catch
-        assert false == true, "quick help does not exist for #{val}"
+        assert false == true, "quick help does not exist for #{val} (#{hh.path()})"
 
   test 'all commands have long help', () ->
     for KEY, val of C.COMMANDS
