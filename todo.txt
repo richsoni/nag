@@ -7,7 +7,8 @@
 * [x] shuffle questions
 * [x] all flag
 * [x] defaults file (nag-count, choose subset)
-* [ ] update readme
+* [ ] flatten defaults
+* [ ] update readme/doc
 
 # features in 2.0
 * [ ] completion

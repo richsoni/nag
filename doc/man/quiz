@@ -1,0 +1,60 @@
+.TH "NAG\-QUIZ" "1" "January 2015" "" ""
+.SH "NAME"
+\fBnag-quiz\fR \- quiz user on completeness of questions
+.SH SYNOPSIS
+.P
+.RS 2
+.nf
+nag quiz [flags]
+.fi
+.RE
+.SH DESCRIPTION
+.P
+
+Nag quiz will prompt the user with questions and save affirmed answers.
+Its behavior is modified by the questions, config, and cli flags.
+
+.SH 
+.SH Options
+
+\fBcommand\fR:
+  Command run by nag when no command is specified.
+  Defualts to: quiz.
+
+\fBaffirmations\fR:
+  Array of words used to tell quiz action has been completed.
+  Defaults to: ['yes', 'y']
+
+\fBpathQuestions\fR:
+  Path where questions file is located.
+  Defaults to ~/.config/nag/questions.coffee
+
+\fBpathCompleted\fR:
+  Path where completed file is located.
+  Defaults to ~/.config/nag/completed
+
+\fBstern\fR:
+  When on, quiz will not allow users to quit with SIGINT (C-C) or SIGKILL (C-D).
+  Defaults to: false
+
+\fBshuffle\fR:
+  When on, the questions will be shuffled.
+  Defaults to: false
+
+\fBnumberOfQuestions\fR:
+  Controls how many questions quiz will propt the user to answer.
+  Defaults to: 3
+
+\fBall\fR:
+  Overrides numberOfQuestions and asks all questions (usually used in cli)
+
+.SH SEE ALSO
+.RS 0
+.IP \(bu 2
+nag help config
+.IP \(bu 2
+nag help quiz
+.IP \(bu 2
+nag help nag
+.RE
+
