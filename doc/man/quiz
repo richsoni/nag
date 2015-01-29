@@ -14,38 +14,35 @@ nag quiz [flags]
 Nag quiz will prompt the user with questions and save affirmed answers.
 Its behavior is modified by the questions, config, and cli flags.
 
-.SH 
-.SH Options
+.SH OPTIONS
 
-\fBcommand\fR:
-  Command run by nag when no command is specified.
-  Defualts to: quiz.
-
-\fBaffirmations\fR:
+\fB--a --affirmations\fR:
   Array of words used to tell quiz action has been completed.
-  Defaults to: ['yes', 'y']
+  example:
+    nag quiz --affirmations='beep,boop'
 
-\fBpathQuestions\fR:
+\fB--path-questions\fR:
   Path where questions file is located.
-  Defaults to ~/.config/nag/questions.coffee
 
-\fBpathCompleted\fR:
+    nag quiz --path-questions=~/.questions
+
+\fB--path-completed\fR:
   Path where completed file is located.
-  Defaults to ~/.config/nag/completed
 
-\fBstern\fR:
+    nag quiz --path-completed=~/.completed
+
+\fB--stern, --no-stern, -s\fR:
   When on, quiz will not allow users to quit with SIGINT (C-C) or SIGKILL (C-D).
-  Defaults to: false
 
-\fBshuffle\fR:
+    nag quiz --no-stern
+
+\fB--shuffle --no-shuffle\fR:
   When on, the questions will be shuffled.
-  Defaults to: false
 
-\fBnumberOfQuestions\fR:
+\fB--number-of-questions\fR:
   Controls how many questions quiz will propt the user to answer.
-  Defaults to: 3
 
-\fBall\fR:
+\fB--all\fR:
   Overrides numberOfQuestions and asks all questions (usually used in cli)
 
 .SH SEE ALSO
