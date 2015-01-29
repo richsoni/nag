@@ -9,9 +9,8 @@ nag faq          commonly asked questions
 nag help <term>  search for help on <term>
 nag help nag     involved overview
 
-Specify configs in the ini-formatted file:
-    /Users/rich/.npmrc
-or on the command line via: npm <command> --key value
-Config info can be viewed via: npm help config
+Specify configs in the coffeescript file:
+    ~/.config/nag/config.coffee
+Config info can be viewed via: nag help config
 
 nag@1.0.0 ~/nag/bin/nag

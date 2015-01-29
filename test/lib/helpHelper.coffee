@@ -1,5 +1,4 @@
 require("../globals")
-fs         = require("fs")
 HelpHelper = require("../../lib/helpHelper")
 C          = require("../../lib/constants")
 
@@ -28,17 +27,9 @@ suite 'help documentation', () ->
   test 'all commands have quick help', () ->
     for KEY, val of C.COMMANDS
       hh = new HelpHelper("help-quick #{val}")
-      try
-        fs.statSync(hh.path())
-        assert true == true
-      catch
-        assert false == true, "quick help does not exist for #{val} (#{hh.path()})"
+      assert hh.fileExists(),"quick help does not exist for #{val} (#{hh.path()})"
 
   test 'all commands have long help', () ->
     for KEY, val of C.COMMANDS
       hh = new HelpHelper("help #{val}")
-      try
-        fs.statSync(hh.path())
-        assert true == true
-      catch
-        assert false == true, "longfrom help does not exist for #{val}"
+      assert hh.fileExists(),"longform help does not exist for #{val} (#{hh.path()})"

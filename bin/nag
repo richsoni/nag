@@ -31,5 +31,8 @@ switch config.command
     if helpHelper.isHelp
       spawn   = require('child_process').spawn
       command = if helpHelper.isQuick then 'cat' else 'man'
-      child   = spawn(command, [helpHelper.path()], { stdio: 'inherit' })
-      child.on('exit', (e, code) ->)
+      if helpHelper.fileExists()
+        child   = spawn(command, [helpHelper.path()], { stdio: 'inherit' })
+        child.on('exit', (e, code) ->)
+      else
+        console.log "No results for \"#{helpHelper.search}\""

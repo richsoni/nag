@@ -1,10 +1,12 @@
-C = require("./constants")
+C  = require("./constants")
+fs = require("fs")
 
 module.exports = class HelpHelper
   constructor: (command) ->
     @_commands = command.split(' ')
     @isQuick = false
     @isHelp  = false
+    @search  = @_commands.slice(1,@_commands.length).join(' ')
     if @_commands[0] == C.HELP_COMMANDS.QUICK
       @isQuick = true
       @isHelp  = true
@@ -24,3 +26,9 @@ module.exports = class HelpHelper
     else
       path = "#{path}/nag"
     return path
+
+  fileExists: () ->
+    try
+      fs.statSync(@path())
+    catch
+      false
