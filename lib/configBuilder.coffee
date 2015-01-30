@@ -1,8 +1,9 @@
 CLIParser  = require("../lib/cliParser")
+C          = require("../lib/constants")
 cliOptions = new CLIParser(args: process.argv.slice(2), env: process.env)
 
 defaults   = require("./defaults")
-config     = require("/Users/rich/.config/nag/config.coffee")
+config     = require(C.PATHS.CONFIG)
 
 module.exports = class ConfigBuilder
   constructor: (params = {}) ->
