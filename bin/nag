@@ -1,17 +1,17 @@
 #! /usr/bin/env coffee
-Nag           = require("../index")
-ConfigBuilder = require("../lib/configBuilder")
-C             = require("../lib/constants")
-HelpHelper    = require("../lib/helpHelper")
-config        = ConfigBuilder.build()
+Nag            = require("../index")
+OptionsBuilder = require("../lib/optionsBuilder")
+C              = require("../lib/constants")
+HelpHelper     = require("../lib/helpHelper")
+options        = OptionsBuilder.build()
 
-switch config.command
+switch options.command
 
   when C.COMMANDS.QUIZ
-    unless config.ignore
+    unless options.ignore
       new Nag({
         interactive: true
-        opts: config
+        opts: options
       })
 
   when C.COMMANDS.EDIT
@@ -27,7 +27,7 @@ switch config.command
     child.on('exit', (e, code) ->)
 
   else
-    helpHelper = new HelpHelper(config.command)
+    helpHelper = new HelpHelper(options.command)
     if helpHelper.isHelp
       spawn   = require('child_process').spawn
       command = if helpHelper.isQuick then 'cat' else 'man'

@@ -1,12 +1,12 @@
-fs          = require("fs")
-Stream      = require("stream")
-Questions   = require("./lib/questions")
-ConfigBuilder = require("./lib/configBuilder")
+fs             = require("fs")
+Stream         = require("stream")
+Questions      = require("./lib/questions")
+OptionsBuilder = require("./lib/optionsBuilder")
 
 module.exports = class Nag
   constructor: (params = {}) ->
     {interactive, @opts} = params
-    @opts ||= ConfigBuilder.build()
+    @opts ||= OptionsBuilder.build()
     if interactive
       @cli()
 
