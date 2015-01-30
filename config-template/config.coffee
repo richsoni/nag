@@ -5,4 +5,7 @@ module.exports =
     completed: '~/.config/nag/completed'
   affirmations: ['yes', 'y']
   flags:
-    stern: true
+    stern: false
+    shuffle: true
+    numberOfQuestions: 3
+    all: false
