@@ -3,7 +3,7 @@ ConfigParser = require("../lib/configParser")
 defaults     = require("./defaults")
 
 cliOptions = new CLIParser(args: process.argv.slice(2), env: process.env)
-config     = new ConfigParser().config
+config     = new ConfigParser().toOptions()
 
 module.exports = class OptionsBuilder
   constructor: (params = {}) ->
