@@ -1,9 +1,9 @@
-CLIParser  = require("../lib/cliParser")
-C          = require("../lib/constants")
-cliOptions = new CLIParser(args: process.argv.slice(2), env: process.env)
+CLIParser    = require("../lib/cliParser")
+ConfigParser = require("../lib/configParser")
+defaults     = require("./defaults")
 
-defaults   = require("./defaults")
-config     = require(C.PATHS.CONFIG)
+cliOptions = new CLIParser(args: process.argv.slice(2), env: process.env)
+config     = new ConfigParser().config
 
 module.exports = class OptionsBuilder
   constructor: (params = {}) ->
