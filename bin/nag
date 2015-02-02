@@ -1,38 +1,44 @@
-#! /usr/bin/env coffee
-Nag            = require("../index")
-OptionsBuilder = require("../lib/optionsBuilder")
-C              = require("../lib/constants")
-HelpHelper     = require("../lib/helpHelper")
-options        = OptionsBuilder.build()
+#! /usr/bin/env 6to5-node
+const Nag            = require("../index")
+const OptionsBuilder = require("../lib/optionsBuilder")
+const C              = require("../lib/constants")
+const HelpHelper     = require("../lib/helpHelper")
+const options        = OptionsBuilder.build()
+const spawn            = require('child_process').spawn
 
-switch options.command
+let editor, child;
 
-  when C.COMMANDS.QUIZ
-    unless options.ignore
+switch(options.command){
+  case C.COMMANDS.QUIZ:
+    if(!options.ignore){
       new Nag({
-        interactive: true
+        interactive: true,
         opts: options
       })
+    }
+    break
 
-  when C.COMMANDS.EDIT
-    spawn  = require('child_process').spawn
+  case C.COMMANDS.EDIT:
     editor = process.env.EDITOR || C.DEFAULTS.EDITOR
     child  = spawn(editor, [C.PATHS.QUESTIONS], { stdio: 'inherit' })
-    child.on('exit', (e, code) ->)
+    child.on('exit', (e, code) => {})
+    break
 
-  when C.COMMANDS.CONFIG
-    spawn  = require('child_process').spawn
+  case C.COMMANDS.CONFIG:
     editor = process.env.EDITOR || C.DEFAULTS.EDITOR
     child  = spawn(editor, [C.PATHS.CONFIG], { stdio: 'inherit' })
-    child.on('exit', (e, code) ->)
+    child.on('exit', (e, code) => {})
+    break
 
-  else
-    helpHelper = new HelpHelper(options.command)
-    if helpHelper.isHelp
-      spawn   = require('child_process').spawn
-      command = if helpHelper.isQuick then 'cat' else 'man'
-      if helpHelper.fileExists()
-        child   = spawn(command, [helpHelper.path()], { stdio: 'inherit' })
-        child.on('exit', (e, code) ->)
-      else
-        console.log "No results for \"#{helpHelper.search}\""
+  default:
+    let helpHelper = new HelpHelper(options.command)
+    if(helpHelper.isHelp){
+      let command = helpHelper.isQuick ? 'cat' : 'man'
+      if(helpHelper.fileExists()){
+        child = spawn(command, [helpHelper.path()], { stdio: 'inherit' })
+        child.on('exit', (e, code) => {})
+      } else {
+        console.log `No results for "${helpHelper.search}"`
+      }
+    }
+}

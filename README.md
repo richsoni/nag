@@ -15,7 +15,7 @@ then add nag to your path.
 
 ### Setup
 
-Add questions to .config/nag/questions.coffee
+Add questions to .config/nag/questions.es6
 
 it will nag everytime you run the ```nag``` command until you tell it you finished
 

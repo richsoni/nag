@@ -9,9 +9,11 @@ const CONFIG = {
 }
 
 const CLI = {
-  command: 'override',
-  flags: {
-    stern: 'override'
+  config: {
+    command: 'override',
+    options: {
+      stern: 'override'
+    }
   }
 }
 

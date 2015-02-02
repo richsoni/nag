@@ -11,7 +11,7 @@ nag edit
 .SH DESCRIPTION
 .P
 Edits the nag questions file which can be specified in the nag configuration file.
-By default this file is locatated at ~/.config/nag/questions.coffee.
+By default this file is locatated at ~/.config/nag/questions.es6.
 
 .SH CONFIGURATION
 
@@ -28,7 +28,7 @@ If this variable is not set vi will be used.
 
 The questions file should prepare a CommonJS module containing an array of questions to be used within the calling program.
 When a command requires use of the questions file it will evaluate it at runtime.
-As such any valid coffeescript can be used to produce the array that the requiring program expects.
+As such any valid javascript can be used to produce the array that the requiring program expects.
 
 A barebones file would return just an empty array.
 

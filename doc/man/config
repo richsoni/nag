@@ -11,7 +11,7 @@ nag edit
 .SH DESCRIPTION
 .P
 Nag can be overrode with special configuration options.
-Typically this file is ~/.config/nag/config.coffee
+Typically this file is ~/.config/nag/config.es6
 
 The config file should prepare a CommonJS module containing an object of options to set.
 Nag will evaluate this file at runtime.
@@ -29,7 +29,7 @@ Settings from this file have a priority that is higher than defaults, but lower 
 
 \fBpathQuestions\fR:
   Path where questions file is located.
-  Defaults to ~/.config/nag/questions.coffee
+  Defaults to ~/.config/nag/questions.es6
 
 \fBpathCompleted\fR:
   Path where completed file is located.

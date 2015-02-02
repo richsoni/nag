@@ -2,4 +2,4 @@
 --reporter min
 -u tdd
 -R list
---compilers coffee:coffee-script/register,es6:6to5/register
+--compilers js:6to5/register
