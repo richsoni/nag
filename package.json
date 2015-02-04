@@ -21,6 +21,7 @@
   "homepage": "https://github.com/richsoni/nag",
   "dependencies": {
     "6to5": "^3.3.2",
+    "deep-extend": "^0.3.2",
     "inflection": "^1.5.3",
     "minimist": "^1.1.0",
     "moment": "^2.9.0",

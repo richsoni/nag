@@ -3,8 +3,8 @@ const Nag            = require("../index")
 const OptionsBuilder = require("../lib/optionsBuilder")
 const C              = require("../lib/constants")
 const HelpHelper     = require("../lib/helpHelper")
-const options        = OptionsBuilder.build()
-const spawn            = require('child_process').spawn
+const options        = new OptionsBuilder()
+const spawn          = require('child_process').spawn
 
 let editor, child;
 
