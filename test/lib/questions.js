@@ -1,6 +1,14 @@
 require("../globals")
 const Questions = require("../../lib/questions")
-
+const questions = [
+  'plain',
+  {'compound': ['10am', '11:59am']},
+  'plain1',
+  'plain2',
+  'plain3',
+  'plain4',
+  {'doubleCompound': {between: [['10am', '11:59am'], ['11pm', '11:05pm']]}},
+]
 suite('Setup',(() => {
   test('load',((done) => {
     Questions.load({
@@ -11,9 +19,10 @@ suite('Setup',(() => {
   }))
 
   test('shuffle',((done) => {
-    //TODO requires questions (there should be a fixture for this
     Questions.load({
       shuffle: true,
+      history: [],
+      questions: questions,
       onReady: (questions) => {
         let shuffled = JSON.stringify(questions.relevantQuestions)
         questions.shuffle = false
@@ -25,9 +34,10 @@ suite('Setup',(() => {
   }))
 
   test('1 number',((done) => {
-    // TODO requires questions (there should be a fixture for this
     Questions.load({
       number:  1,
+      history: [],
+      questions: questions,
       onReady: (questions) => {
         assert(questions.relevantQuestions.length == 1, 'control number of questions asked')
         done()
@@ -36,9 +46,10 @@ suite('Setup',(() => {
   }))
 
   test('3 number',((done) => {
-    // TODO requires questions (there should be a fixture for this
     Questions.load({
       number:  3,
+      history: [],
+      questions: questions,
       onReady: (questions) => {
         assert(questions.relevantQuestions.length == 3, 'control number of questions asked')
         done()
@@ -47,10 +58,24 @@ suite('Setup',(() => {
   }))
 
   test('all',((done) => {
-    // TODO requires questions (there should be a fixture for this
     Questions.load({
       number:  1,
       all: true,
+      history: [],
+      questions: questions,
+      onReady: (questions) => {
+        assert(questions.relevantQuestions.length > 1, 'all will override number')
+        done()
+      }
+    })
+  }))
+
+  test('all',((done) => {
+    Questions.load({
+      number:  1,
+      all: true,
+      history: [],
+      questions: questions,
       onReady: (questions) => {
         assert(questions.relevantQuestions.length > 1, 'all will override number')
         done()
