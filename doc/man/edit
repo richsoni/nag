@@ -11,7 +11,7 @@ nag edit
 .SH DESCRIPTION
 .P
 Edits the nag questions file which can be specified in the nag configuration file.
-By default this file is locatated at ~/.config/nag/questions.es6.
+By default this file is locatated at ~/.config/nag/questions.js.
 
 .SH CONFIGURATION
 
@@ -53,7 +53,7 @@ These strings represent tasks that need to be completed daily.
 .\}
 .nf
 module.exports = [
-  'beep'
+  'beep',
   'boop'
 ]
 .fi
@@ -72,8 +72,8 @@ The value can be a \fIrange\f
 .\}
 .nf
 module.exports = [
-  'beep'
-  'boop': ['10pm', '11:59pm']
+  'beep',
+  {'boop': ['10pm', '11:59pm']}
 ]
 .fi
 .if n \{\
@@ -95,10 +95,8 @@ The following example leverages the between option to select 'boop' only from 10
 .\}
 .nf
 module.exports = [
-  'beep'
-  'boop':{
-    between: ['10am','11am'],['1pm','2pm']
-  }
+  'beep',
+  {'boop': {between: ['10am','11am'],['1pm','2pm']}}
 ]
 .fi
 .if n \{\
