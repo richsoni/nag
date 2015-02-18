@@ -2,4 +2,4 @@
 --reporter min
 -u tdd
 -R list
---compilers js:6to5/register
+--compilers js:babel/register

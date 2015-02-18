@@ -1,4 +1,4 @@
-#! /usr/bin/env 6to5-node
+#! /usr/bin/env babel-node
 const Nag            = require("../index")
 const OptionsBuilder = require("../lib/optionsBuilder")
 const C              = require("../lib/constants")

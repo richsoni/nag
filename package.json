@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/richsoni/nag",
   "dependencies": {
-    "6to5": "^3.3.2",
+    "babel": "^4.3.0",
     "deep-extend": "^0.3.2",
     "inflection": "^1.5.3",
     "minimist": "^1.1.0",
