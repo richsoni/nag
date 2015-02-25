@@ -1,0 +1,62 @@
+.TH "NAG\-CONFIG" "1" "January 2015" "" ""
+.SH "NAME"
+\fBnag-config\fR \- edit nag configuration file
+.SH SYNOPSIS
+.P
+.RS 2
+.nf
+nag edit
+.fi
+.RE
+.SH DESCRIPTION
+.P
+Nag can be overrode with special configuration options.
+Typically this file is ~/.config/nag/config.js
+
+The config file should prepare a CommonJS module containing an object of options to set.
+Nag will evaluate this file at runtime.
+Settings from this file have a priority that is higher than defaults, but lower than command flags.
+
+.SH Options
+
+\fBcommand\fR:
+  Command run by nag when no command is specified.
+  Defualts to: quiz.
+
+\fBaffirmations\fR:
+  Array of words used to tell quiz action has been completed.
+  Defaults to: ['yes', 'y']
+
+\fBpathQuestions\fR:
+  Path where questions file is located.
+  Defaults to ~/.config/nag/questions.es6
+
+\fBpathCompleted\fR:
+  Path where completed file is located.
+  Defaults to ~/.config/nag/completed
+
+\fBstern\fR:
+  When on, quiz will not allow users to quit with SIGINT (C-C) or SIGKILL (C-D).
+  Defaults to: false
+
+\fBshuffle\fR:
+  When on, the questions will be shuffled.
+  Defaults to: false
+
+\fBnumberOfQuestions\fR:
+  Controls how many questions quiz will propt the user to answer.
+  Defaults to: 3
+
+\fBall\fR:
+  Overrides numberOfQuestions and asks all questions (usually used in cli)
+
+.SH SEE ALSO
+.RS 0
+.IP \(bu 2
+nag help edit
+.IP \(bu 2
+nag help quiz
+.IP \(bu 2
+nag help nag
+.RE
+

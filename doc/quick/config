@@ -1,0 +1,3 @@
+nag config
+
+Uses $EDITOR environment variable, or vi

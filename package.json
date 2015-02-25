@@ -2,12 +2,12 @@
   "name": "nag",
   "version": "1.0.0",
   "description": "and you thought yo mamma was a nag",
-  "main": "index.js",
+  "main": "index.es6",
   "scripts": {
     "test": "mocha",
-    "test-watch": "mocha --watch test",
+    "testWatch": "mocha --watch test",
     "t": "npm run test",
-    "tw": "npm run test-watch"
+    "tw": "npm run testWatch"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,12 @@
   },
   "homepage": "https://github.com/richsoni/nag",
   "dependencies": {
-    "moment": "^2.9.0"
+    "babel": "^4.3.0",
+    "deep-extend": "^0.3.2",
+    "inflection": "^1.5.3",
+    "minimist": "^1.1.0",
+    "moment": "^2.9.0",
+    "shuffle-array": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1"

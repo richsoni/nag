@@ -1,0 +1,57 @@
+.TH "NAG\-QUIZ" "1" "January 2015" "" ""
+.SH "NAME"
+\fBnag-quiz\fR \- quiz user on completeness of questions
+.SH SYNOPSIS
+.P
+.RS 2
+.nf
+nag quiz [flags]
+.fi
+.RE
+.SH DESCRIPTION
+.P
+
+Nag quiz will prompt the user with questions and save affirmed answers.
+Its behavior is modified by the questions, config, and cli flags.
+
+.SH OPTIONS
+
+\fB--a --affirmations\fR:
+  Array of words used to tell quiz action has been completed.
+  example:
+    nag quiz --affirmations='beep,boop'
+
+\fB--path-questions\fR:
+  Path where questions file is located.
+
+    nag quiz --path-questions=~/.questions
+
+\fB--path-completed\fR:
+  Path where completed file is located.
+
+    nag quiz --path-completed=~/.completed
+
+\fB--stern, --no-stern, -s\fR:
+  When on, quiz will not allow users to quit with SIGINT (C-C) or SIGKILL (C-D).
+
+    nag quiz --no-stern
+
+\fB--shuffle --no-shuffle\fR:
+  When on, the questions will be shuffled.
+
+\fB--number-of-questions\fR:
+  Controls how many questions quiz will propt the user to answer.
+
+\fB--all\fR:
+  Overrides numberOfQuestions and asks all questions (usually used in cli)
+
+.SH SEE ALSO
+.RS 0
+.IP \(bu 2
+nag help config
+.IP \(bu 2
+nag help edit
+.IP \(bu 2
+nag help nag
+.RE
+

@@ -1,0 +1,44 @@
+#! /usr/bin/env babel-node
+const Nag            = require("../index")
+const OptionsBuilder = require("../lib/optionsBuilder")
+const C              = require("../lib/constants")
+const HelpHelper     = require("../lib/helpHelper")
+const options        = new OptionsBuilder()
+const spawn          = require('child_process').spawn
+
+let editor, child;
+
+switch(options.command){
+  case C.COMMANDS.QUIZ:
+    if(!options.ignore){
+      new Nag({
+        interactive: true,
+        opts: options
+      })
+    }
+    break
+
+  case C.COMMANDS.EDIT:
+    editor = process.env.EDITOR || C.DEFAULTS.EDITOR
+    child  = spawn(editor, [C.PATHS.QUESTIONS], { stdio: 'inherit' })
+    child.on('exit', (e, code) => {})
+    break
+
+  case C.COMMANDS.CONFIG:
+    editor = process.env.EDITOR || C.DEFAULTS.EDITOR
+    child  = spawn(editor, [C.PATHS.CONFIG], { stdio: 'inherit' })
+    child.on('exit', (e, code) => {})
+    break
+
+  default:
+    let helpHelper = new HelpHelper(options.command)
+    if(helpHelper.isHelp){
+      let command = helpHelper.isQuick ? 'cat' : 'man'
+      if(helpHelper.fileExists()){
+        child = spawn(command, [helpHelper.path()], { stdio: 'inherit' })
+        child.on('exit', (e, code) => {})
+      } else {
+        console.log `No results for "${helpHelper.search}"`
+      }
+    }
+}

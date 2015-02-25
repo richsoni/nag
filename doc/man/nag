@@ -1,0 +1,25 @@
+.SH "NAME"
+\fBnag-nag\fR \- nag will bother you until you do stuff
+.SH SYNOPSIS
+.P
+.RS 2
+.nf
+nag
+.fi
+.RE
+.SH DESCRIPTION
+.P
+
+...and you thought yo mamma was a nag
+
+Nag is a configurable command line program that bothers you until you do stuff.
+
+.SH SEE ALSO
+.RS 0
+.IP \(bu 2
+nag help config
+.IP \(bu 2
+nag help edit
+.IP \(bu 2
+nag help quiz
+.RE

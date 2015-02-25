@@ -1,7 +1,16 @@
-# features in lisp 1.0 milestone
-* [ ] add tests
-* [ ] nag ignore
-* [ ] nag edit
-* [ ] defaults file (nag-count, choose subset)
-* [ ] test flag
-* [ ] all flag
+# features in 1.0 milestone
+* [x] add tests
+* [x] nag ignore
+* [x] nag edit
+* [x] test flag
+* [x] config command
+* [x] shuffle questions
+* [x] all flag
+* [x] defaults file (nag-count, choose subset)
+* [x] update doc
+* [ ] update readme
+* [ ] flatten defaults
+
+# features in 2.0
+* [ ] completion
+* [ ] questions should accept cron tab format

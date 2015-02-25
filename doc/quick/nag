@@ -1,0 +1,16 @@
+Usage: nag <command>
+
+where <command> is one of:
+    config, edit, help, quiz
+
+nag <cmd> -h     quick help on <cmd>
+nag -l           display full usage info
+nag faq          commonly asked questions
+nag help <term>  search for help on <term>
+nag help nag     involved overview
+
+Specify configs in the javascript file:
+    ~/.config/nag/config.es6
+Config info can be viewed via: nag help config
+
+nag@1.0.0 ~/nag/bin/nag

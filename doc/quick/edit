@@ -1,0 +1,3 @@
+nag edit
+
+Uses $EDITOR environment variable, or vi
