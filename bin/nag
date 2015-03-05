@@ -24,6 +24,10 @@ switch(options.command){
     child.on('exit', (e, code) => {})
     break
 
+  case C.COMMANDS.STAT:
+    console.log('here')
+    break
+
   case C.COMMANDS.CONFIG:
     editor = process.env.EDITOR || C.DEFAULTS.EDITOR
     child  = spawn(editor, [C.PATHS.CONFIG], { stdio: 'inherit' })

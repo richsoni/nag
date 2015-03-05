@@ -8,8 +8,8 @@
 * [x] all flag
 * [x] defaults file (nag-count, choose subset)
 * [x] update doc
-* [ ] update readme
-* [ ] flatten defaults
+* [x] update readme
+* [x] flatten defaults
 
 # features in 2.0
 * [ ] completion
