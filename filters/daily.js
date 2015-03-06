@@ -10,6 +10,6 @@ module.exports = (task) => {
       return true
     }
   } else {
-    return false
+    return true
   }
 }
