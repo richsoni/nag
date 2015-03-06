@@ -1,10 +1,10 @@
 const moment   = require("moment")
 
-module.exports = (task) => {
-  if(task){
-    let timestamp = task.split(' ')[0]
+module.exports = (question) => {
+  if(question.lastOccurance){
+    let lastOccurance = question.lastOccurance.split(' ')[0]
     let today = moment().format('YYYY-MM-DD')
-    if(timestamp == today) {
+    if(lastOccurance == today) {
       return false
     } else {
       return true
