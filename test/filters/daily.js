@@ -4,12 +4,12 @@ const daily = require("../../filters/daily")
 
 const truthy = {
   question: 'test',
-  lastOccurance: '2014-12-01 task 1',
+  lastOccurance: moment().subtract(5, 'days'),
   filters: {}
 }
 const falsy = {
   question: 'test',
-  lastOccurance: `${moment().format('YYYY-MM-DD')} task 1`,
+  lastOccurance: moment(),
   filters: {}
 }
 suite('Filters',(() =>

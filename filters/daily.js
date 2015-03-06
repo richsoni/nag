@@ -1,9 +1,10 @@
-const moment   = require("moment")
+const moment = require("moment")
+const FORMAT = 'YYYY-MM-DD'
 
 module.exports = (question) => {
   if(question.lastOccurance){
-    let lastOccurance = question.lastOccurance.split(' ')[0]
-    let today = moment().format('YYYY-MM-DD')
+    let lastOccurance = question.lastOccurance.format(FORMAT)
+    let today = moment().format(FORMAT)
     if(lastOccurance == today) {
       return false
     } else {
