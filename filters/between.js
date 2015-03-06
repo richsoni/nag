@@ -1,5 +1,6 @@
 const moment = require("moment")
 const NOW    = moment()
+
 module.exports = (hash) => {
   if(hash.filters.between){
     //supports only am and pm now
