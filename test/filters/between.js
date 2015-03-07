@@ -3,7 +3,7 @@ const between  = require("../../filters/between")
 require("../globals")
 const FORMAT = 'hh:mma'
 
-const truthySingle = {
+const truthy = {
   question: 'test',
   lastOccurance: moment().subtract(5, 'days'),
   filters: {
@@ -13,6 +13,8 @@ const truthySingle = {
     ]
   }
 }
+
+
 const falsy = {
   question: 'test',
   lastOccurance: moment().subtract(5, 'days'),
@@ -25,6 +27,6 @@ const falsy = {
 }
 suite('Filters',(() =>
   test('Today',(() => {
-    assert(between(truthySingle) == true)
+    assert(between(truthy) == true)
     assert(between(falsy) == false)
 }))))
