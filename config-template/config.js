@@ -12,5 +12,9 @@ module.exports = {
       numberOfQuestions: 3,
       all: false
     }
-  }
+  },
+  filters: [
+    'daily',
+    'between'
+  ]
 }
